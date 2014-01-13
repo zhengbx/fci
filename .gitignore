@@ -11,3 +11,12 @@
 *.lai
 *.la
 *.a
+
+# input files
+FCIINP*
+
+# tempfiles
+*.swp
+
+# executable
+fci
