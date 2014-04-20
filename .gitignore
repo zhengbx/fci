@@ -13,7 +13,7 @@
 *.a
 
 # input files
-FCIINP*
+#FCIINP*
 
 # tempfiles
 *.swp
