@@ -20,6 +20,7 @@
 #include <iomanip>
 #include <fstream>
 #include <cstring>
+#include <string>
 #include <cstdio>
 #include <cmath>
 #include "math.h"
@@ -102,7 +103,7 @@ int main(int argc, char *argv[]) {
   Timer t_list("making Hamiltonian mapping lists");
   t_list.start();
   if (!osh) {
-    osh = true;
+    osh = true; // closed shell not implemented correctly
     nB = nA;
     nelecB = nelecA;
   }
@@ -185,6 +186,11 @@ int main(int argc, char *argv[]) {
     }
     E_old = E;
   }
+  
+  if (true) {
+    print_vec(x, nmo, nelecA, nelecB);
+  }
+  
   t_total.finish();
   t_total.print();
   // disposal the arrays

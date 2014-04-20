@@ -26,6 +26,10 @@
 #include <assert.h>
 #include <fstream>
 #include "timer.h"
+#include <vector>
+#include <string>
+
+using std::string;
 
 int makelist(int** &list, int& len, int nmo, int nocc, list_type type) {
   if (type == O) {
@@ -582,4 +586,37 @@ int Hamp(double** &y, double** x, double** D, double* oei, double* tei, int nmo,
   } else {
   }
   return 0;
+}
+
+string occ_info(int nmo, int occA, int occB) {
+  string b(nmo, '0');
+  for (int i = 0; i < nmo; ++i) {
+    bool oA = occA & (1 << i);
+    bool oB = occB & (1 << i);
+    if (oA && oB) {
+      b[i] = '2';
+    } else if (oA && (!oB)) {
+      b[i] = 'a';
+    } else if (oB) {
+      b[i] = 'b';
+    } else {
+      b[i] = '0';
+    }
+  }
+  return b;
+}
+
+void print_vec(double** &x, int nmo, int nelecA, int nelecB) {
+  printf("FCI solution:\n");
+  if (nelecB < 0) {
+    nelecB = nelecA;
+  }
+  int nA = comb(nmo, nelecA), nB = comb(nmo, nelecB);
+  for (int i = 0; i < nA; ++i) {
+    int occA = str(nmo, nelecA, i+1);
+    for (int j = 0; j < nB; ++j) {
+      int occB = str(nmo, nelecB, j+1);
+      printf("%s %20.12e\n", occ_info(nmo, occA, occB).c_str(), x[i][j]);
+    }
+  }
 }

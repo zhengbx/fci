@@ -18,6 +18,8 @@
 
 // calculate y=Hx
 
+#include <string>
+
 typedef int list_type;
 
 const list_type
@@ -44,3 +46,7 @@ int makeDiagH(double** &D, int nmo, double* oei, double* tei, int nA, int* llist
 int init_X(double** &x, int nA, int nB = 0);
 
 int Hamp(double** &y, double** x, double** D, double* oei, double* tei, int nmo, int nA, int* llistA, int*** listA, int nB = 0, int* llistB = NULL, int*** listB = NULL);
+
+std::string occ_info(int nmo, int occA, int occB);
+void print_vec(double** &x, int nmo, int nelecA, int nelecB = -1);
+
